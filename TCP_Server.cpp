@@ -44,7 +44,7 @@ TCP_Server::~TCP_Server() {
 }
 
 
-int TCP_Server::accept(void) {
+int TCP_Server::accept() {
     // waiting for incoming requests
     std::cout << "waiting for incoming requests ..." << std::endl;
     int conn = ::accept(_socket, (struct sockaddr *)&_address, &_addrlen);

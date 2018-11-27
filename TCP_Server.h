@@ -18,11 +18,11 @@ private:
 
 public:
     TCP_Server(int port, int queueSize);
-    ~TCP_Server(void);
+    ~TCP_Server();
 
-    int accept(void);
+    int accept();
     void send(std::string msg);
-    std::string recv(void);
+    std::string recv();
 };
 
 
