@@ -11,14 +11,14 @@
 #include <netinet/in.h>
 
 class TCP_Socket {
-private:
-    sockaddr_in _address;
+public:
     int _socket;
+    sockaddr_in _address;
     socklen_t _addrlen;
 
 public:
+    TCP_Socket();
     TCP_Socket(std::string ip, int port);
-    TCP_Socket(int port);
     ~TCP_Socket();
 
     void send(std::string msg);

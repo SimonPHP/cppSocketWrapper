@@ -15,6 +15,8 @@
 #include <string>
 #include <iostream>
 
+TCP_Socket::TCP_Socket(){}
+
 TCP_Socket::TCP_Socket(std::string ip, int port) {
     _socket = ::socket(PF_INET, SOCK_STREAM, 0);
     if (_socket == -1)
@@ -31,15 +33,11 @@ TCP_Socket::TCP_Socket(std::string ip, int port) {
         throw std::string ("server " + ip + ": " + strerror(errno));
 }
 
-TCP_Socket::TCP_Socket(int socket) { //ToDo remove the ']]]' end Tag
-    _socket = socket;
-}
-
-void TCP_Socket::send(std::string msg) {
+void TCP_Socket::send(std::string msg) {  //ToDo remove the ']]]' end Tag
     msg += "]]]";
     ::write(_socket, msg.c_str(), msg.length());
     #ifdef DEBUG
-        //std::cout << "sent: " << msg << std::endl;
+        std::cout << "sent: " << msg << std::endl;
     #endif
 }
 

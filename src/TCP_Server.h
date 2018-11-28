@@ -13,16 +13,14 @@
 
 class TCP_Server {
 private:
-    sockaddr_in _address;
-    int _socket;
-    socklen_t _addrlen;
+    TCP_Socket sock;
 
 public:
-    TCP_Server(int port, int queueSize);
-    ~TCP_Server();
+TCP_Server(int port, int queueSize);
+~TCP_Server();
 
-    TCP_Socket accept();
-    void close();
+TCP_Socket accept();
+void close();
 };
 
 

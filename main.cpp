@@ -16,11 +16,11 @@ void client()
 
     clock_nanosleep(CLOCK_MONOTONIC, NULL, &sleepTime, NULL);
 
-    TCP_Socket sock("127.0.0.1", 8080);
-    sock.send("Eine Nachricht vom Client");
+    TCP_Socket sock("127.0.0.1", 8080); //verbindungsaufbau
 
-    std::string rec = sock.recv();
+    sock.send("Eine Nachricht vom Client"); //client sendet als erstes eine nachricht an den server
 
+    std::string rec = sock.recv(); //der server antwortet dann
     std::cout << rec << std::endl;
 
     sock.close();
@@ -35,23 +35,21 @@ int main() {
     #endif
 
     std::cout << "Init Client Thread" << std::endl;
-
     std::thread t1(client);
 
     std::cout << "Init Server" << std::endl;
 
-    TCP_Server server = TCP_Server(8080, 10);
-
-    TCP_Socket s = server.accept();
+    TCP_Server server = TCP_Server(8080, 4);
+    TCP_Socket s = server.accept(); //hier wird auf den anderen thread gewaretet.
 
     std::cout << "Client angenommen" << std::endl;
-
     std::cout << s.recv() << std::endl;
+
 
     s.send("Nachricht vom server");
 
-    s.close();
 
+    s.close();
     t1.join(); //wait for thread to exit bevor exit main
 
     return 0;
