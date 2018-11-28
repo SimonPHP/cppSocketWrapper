@@ -40,16 +40,18 @@ int main() {
     std::cout << "Init Server" << std::endl;
 
     TCP_Server server = TCP_Server(8080, 4);
-    TCP_Socket s = server.accept(); //hier wird auf den anderen thread gewaretet.
+    int sd = server.accept(); //hier wird auf den anderen thread gewaretet.
+
+    TCP_Socket sock = TCP_Socket(sd);
 
     std::cout << "Client angenommen" << std::endl;
-    std::cout << s.recv() << std::endl;
+    std::cout << sock.recv() << std::endl;
 
 
-    s.send("Nachricht vom server");
+    sock.send("Nachricht vom server");
 
 
-    s.close();
+    sock.close();
     t1.join(); //wait for thread to exit bevor exit main
 
     return 0;

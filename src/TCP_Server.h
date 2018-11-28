@@ -19,7 +19,7 @@ public:
 TCP_Server(int port, int queueSize);
 ~TCP_Server();
 
-TCP_Socket accept();
+int accept();
 void close();
 };
 

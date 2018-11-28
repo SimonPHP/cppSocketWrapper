@@ -18,6 +18,7 @@ public:
 
 public:
     TCP_Socket();
+    TCP_Socket(int fd);
     TCP_Socket(std::string ip, int port);
     ~TCP_Socket();
 

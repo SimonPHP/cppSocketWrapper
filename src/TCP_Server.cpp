@@ -49,24 +49,20 @@ void TCP_Server::close() {
     ::close(sock._socket);
 }
 
-TCP_Socket TCP_Server::accept() {
+int TCP_Server::accept() {
     // waiting for incoming requests
     #ifdef DEBUG
         std::cout << "waiting for incoming requests ..." << std::endl;
     #endif
 
-    TCP_Socket *retSock = new TCP_Socket;
-
-    int conn = ::accept( sock._socket, (struct sockaddr *)&retSock->_address, &retSock->_addrlen);
+    int conn = ::accept(sock._socket, (struct sockaddr *)&sock._address, &sock._addrlen);
 
     if (conn == -1)
         throw std::string("server: ") + strerror(errno);
-
-    retSock->_socket = conn;
 
     #ifdef DEBUG
         std::cout << "got request ---> new socket: " << conn << std::endl;
     #endif
 
-    return *retSock;
+    return conn;
 }

@@ -17,6 +17,10 @@
 
 TCP_Socket::TCP_Socket(){}
 
+TCP_Socket::TCP_Socket(int fd){
+    _socket = fd;
+}
+
 TCP_Socket::TCP_Socket(std::string ip, int port) {
     _socket = ::socket(PF_INET, SOCK_STREAM, 0);
     if (_socket == -1)
