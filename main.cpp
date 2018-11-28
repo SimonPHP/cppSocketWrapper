@@ -17,6 +17,11 @@ void client()
     clock_nanosleep(CLOCK_MONOTONIC, NULL, &sleepTime, NULL);
 
     TCP_Socket sock("127.0.0.1", 8080);
+    sock.send("Eine Nachricht vom Client");
+
+    std::string rec = sock.recv();
+
+    std::cout << rec << std::endl;
 }
 
 int main() {
@@ -35,7 +40,7 @@ int main() {
     TCP_Server server = TCP_Server(8080, 10);
 
     if(server.accept()) {
-        std::cout << "heeyy" << std::endl;
+        std::cout << "Client angenommen" << std::endl;
     }
 
     return 0;

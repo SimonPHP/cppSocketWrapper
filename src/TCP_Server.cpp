@@ -43,8 +43,11 @@ TCP_Server::~TCP_Server() {
     ::close(_socket);
 }
 
+void TCP_Server::close() {
+    ::close(_socket);
+}
 
-int TCP_Server::accept() {
+int TCP_Server::accept() { //ToDo: return TCP_Socket
     // waiting for incoming requests
     #ifdef DEBUG
         std::cout << "waiting for incoming requests ..." << std::endl;

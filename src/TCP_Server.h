@@ -21,8 +21,7 @@ public:
     ~TCP_Server();
 
     int accept();
-    void send(std::string msg);
-    std::string recv();
+    void close();
 };
 
 
