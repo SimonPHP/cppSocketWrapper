@@ -3,6 +3,7 @@
 //
 
 #include "TCP_Server.h"
+#include "TCP_Socket.h"
 
 #include <unistd.h>
 #include <sys/stat.h>
@@ -47,11 +48,12 @@ void TCP_Server::close() {
     ::close(_socket);
 }
 
-int TCP_Server::accept() { //ToDo: return TCP_Socket
+TCP_Socket TCP_Server::accept() {
     // waiting for incoming requests
     #ifdef DEBUG
         std::cout << "waiting for incoming requests ..." << std::endl;
     #endif
+
     int conn = ::accept(_socket, (struct sockaddr *)&_address, &_addrlen);
 
     if (conn == -1)
@@ -60,5 +62,5 @@ int TCP_Server::accept() { //ToDo: return TCP_Socket
     #ifdef DEBUG
         std::cout << "got request ---> new socket: " << conn << std::endl;
     #endif
-    return conn;
+    return TCP_Socket(conn);
 }

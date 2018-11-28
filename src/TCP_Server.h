@@ -9,6 +9,7 @@
 #include <cerrno>
 #include <cstring>
 #include <netinet/in.h>
+#include "TCP_Socket.h"
 
 class TCP_Server {
 private:
@@ -20,7 +21,7 @@ public:
     TCP_Server(int port, int queueSize);
     ~TCP_Server();
 
-    int accept();
+    TCP_Socket accept();
     void close();
 };
 

@@ -31,17 +31,19 @@ TCP_Socket::TCP_Socket(std::string ip, int port) {
         throw std::string ("server " + ip + ": " + strerror(errno));
 }
 
-TCP_Socket::TCP_Socket(int socket) {
+TCP_Socket::TCP_Socket(int socket) { //ToDo remove the ']]]' end Tag
     _socket = socket;
 }
 
 void TCP_Socket::send(std::string msg) {
     msg += "]]]";
     ::write(_socket, msg.c_str(), msg.length());
-    std::cout << "sent: " << msg << std::endl;
+    #ifdef DEBUG
+        //std::cout << "sent: " << msg << std::endl;
+    #endif
 }
 
-std::string TCP_Socket::recv() {
+std::string TCP_Socket::recv() { //ToDo remove the ']]]' end Tag
     char block[256];
     std::string res;
     int len;

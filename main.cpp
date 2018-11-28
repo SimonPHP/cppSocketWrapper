@@ -22,6 +22,9 @@ void client()
     std::string rec = sock.recv();
 
     std::cout << rec << std::endl;
+
+    sock.close();
+    exit(1);
 }
 
 int main() {
@@ -39,9 +42,17 @@ int main() {
 
     TCP_Server server = TCP_Server(8080, 10);
 
-    if(server.accept()) {
-        std::cout << "Client angenommen" << std::endl;
-    }
+    TCP_Socket s = server.accept();
+
+    std::cout << "Client angenommen" << std::endl;
+
+    std::cout << s.recv() << std::endl;
+
+    s.send("Nachricht vom server");
+
+    s.close();
+
+    t1.join(); //wait for thread to exit bevor exit main
 
     return 0;
 }
