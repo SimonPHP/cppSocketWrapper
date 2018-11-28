@@ -28,7 +28,7 @@ TCP_Socket::TCP_Socket(std::string ip, int port) {
 
     int flag = ::connect(_socket, (struct sockaddr *)&_address, len);
     if (flag == -1)
-        throw std::string("server " + ip + ": " + strerror(errno));
+        throw std::string ("server " + ip + ": " + strerror(errno));
 }
 
 TCP_Socket::TCP_Socket(int socket) {
@@ -60,5 +60,9 @@ std::string TCP_Socket::recv() {
 }
 
 void TCP_Socket::close() {
+    ::close(_socket);
+}
+
+TCP_Socket::~TCP_Socket() {
     ::close(_socket);
 }

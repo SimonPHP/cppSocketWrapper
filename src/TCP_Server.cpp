@@ -46,12 +46,16 @@ TCP_Server::~TCP_Server() {
 
 int TCP_Server::accept() {
     // waiting for incoming requests
-    std::cout << "waiting for incoming requests ..." << std::endl;
+    #ifdef DEBUG
+        std::cout << "waiting for incoming requests ..." << std::endl;
+    #endif
     int conn = ::accept(_socket, (struct sockaddr *)&_address, &_addrlen);
 
     if (conn == -1)
         throw std::string("server: ") + strerror(errno);
 
-    std::cout << "got request ---> new socket: " << conn << std::endl;
+    #ifdef DEBUG
+        std::cout << "got request ---> new socket: " << conn << std::endl;
+    #endif
     return conn;
 }
